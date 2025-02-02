@@ -21,10 +21,10 @@ class TWCheck:
             return Status(Type.ERROR, 0)
 
 def get_tasks_count_by_tag(tag: str) -> int:
-    return exec_extract_number(['task', tag, '+READY', 'count'])
+    return exec_extract_number(['task', 'rc.gc=off', tag, '+READY', 'count'])
 
 def get_tasks_for_review() -> int:
-    return exec_extract_number(['bash', '-c', 'task _reviewed | wc -l'])
+    return exec_extract_number(['bash', '-c', 'task rc.gc=off _reviewed | wc -l'])
 
 def exec_extract_number(args) -> int:
     result = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
